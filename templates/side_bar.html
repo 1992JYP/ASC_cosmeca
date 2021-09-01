@@ -1,0 +1,40 @@
+<div class="main-sidebar">
+    <aside id="sidebar-wrapper">
+        <div class="sidebar-brand">
+            <a href="{% url 'main' %}">생활낙원
+            </a>
+        </div>
+        <div class="sidebar-brand sidebar-brand-sm">
+            <a href="index.html">St</a>
+        </div>
+        <ul class="sidebar-menu list" >
+            <li id ="first_main_menu">
+                <a href="{% url 'main' %} " class="nav-link has-dropdown">
+                    <i class="fas fa-fire"></i>
+                    <span>DASHBOARD</span>
+                </a>
+            </li>
+            <li>
+                <a href={% url 'keyword' %} class="nav-link has-dropdown" data-toggle="dropdown">
+                <i class="fas fa-columns"></i>
+                <span>랭킹분석</span>
+                </a>
+            </li>           
+            <li>
+                <a href={% url 'review' %} class="nav-link">
+                    <i class="far fa-square"></i>
+                    <span>키워드 분석</span>
+                </a>
+            </li>
+            <li>
+                <a href="{% url 'Dashboard' %} " class="nav-link has-dropdown">
+                    <i class="fas fa-th"></i>
+                    <span>트랜드 추이</span>
+                </a>
+                <ul class="dropdown-menu"></ul>
+            </li>
+
+
+        </ul>
+    </aside>
+</div>

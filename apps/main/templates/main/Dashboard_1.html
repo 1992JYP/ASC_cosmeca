@@ -1,0 +1,221 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block script %}
+
+{% endblock %}
+
+{% block title %}생활낙원{% endblock %}
+
+{% block content %}
+
+
+        <div style="position : absolute;top:148px;"><h3> 랭킹 변화</h3></div>
+        <div style="position : absolute;top: 535px;"><h3> 리뷰별</h3></div>
+        <div style="position : absolute;top:148px;left: 1105px;"><h3>상세 순위변동 차트</h3></div>
+
+
+        <!-- 첫번째 상단-->
+        <div  style="position : absolute;width: 700px;height: 10px;">
+				<div class="table100 ver1 m-b-110" style="width: 700px;margin-bottom: 0px;top: 130px;">
+					<div class="table100-head">
+						<table>
+							<thead>
+								<tr class="row100 head">
+									<th class="cell100 column1">keyword_ranking</th>
+									<th class="cell100 column2">title</th>
+									<th class="cell100 column3">price</th>
+									<th class="cell100 column4">move_ranking</th>
+								</tr>
+							</thead>
+						</table>
+					</div>
+
+					<div class="table100-body js-pscroll">
+						<table>
+							<tbody>
+							{% for list in rankingchange %}
+								<tr class="row100 body">
+									<td class="cell100 column1">
+										{{list.pd_index}} <em>(
+										{% if list.change_index == 9999 %}
+											신규
+										{% else %}
+											{{list.change_index}}
+										{% endif %}
+										)</em>
+                                    </td>
+									<td class="cell100 column2">
+                             <!--{% comment %} <form action ="{% url 'chart' %}" method="get"> {% endcomment %}--> 
+                                 <a href="{% url 'chart' %}?title={{list.title}}" name="chart" value="{{list.title}}" method="get">{{list.title}} </a >
+                                 
+                              <!--{% comment %} </form> {% endcomment %}-->
+                           </td>
+									<td class="cell100 column3">{{list.price}}</td>
+									<td class="cell100 column4">{{list.grade}}</td>
+								</tr>
+							{% endfor %}
+							</tbody>
+						</table>
+					</div>
+				</div>
+			
+		
+        </div>
+
+    
+        <!-- 두번째 하단-->    
+        <div  style="position : absolute;width: 700px;height: 10px;top: 850px;">
+				<div class="table100 ver1 m-b-110" style="width: 1510px;margin-bottom: 0px;top: 130px;">
+					<div class="table100-head">
+						<table>
+							<thead>
+								<tr class="row100 head">
+									<th class="cell100 column1">site</th>
+									<th class="cell100 column2">title</th>
+									<th class="cell100 column3">review</th>
+									<th class="cell100 column4">score</th>
+								</tr>
+							</thead>
+						</table>
+					</div>
+
+					<div class="table100-body js-pscroll">
+						<table>
+							<tbody>
+							{% for list in ranking %}
+								<tr class="row100 body">
+									<td class="cell100 column1">
+										{{list.pd_index}} <em>(
+										{% if list.change_index == 9999 %}
+											신규
+										{% else %}
+											{{list.change_index}}
+										{% endif %}
+										)</em>
+                                    </td>
+									<td class="cell100 column2">{{list.title}}</td>
+									<td class="cell100 column3">{{list.price}}</td>
+									<td class="cell100 column4">{{list.grade}}</td>
+								</tr>
+							{% endfor %}
+							</tbody>
+						</table>
+					</div>
+				</div>
+			
+		
+        </div> 
+
+         <!-- 상단 그래프 2개-->
+        <canvas id="line-chart" style="width: 700px;height:300px; position: absolute;left:1100px;top:200px;"></canvas>
+        <canvas id="line-chart1" style="width: 700px;height:300px; position: absolute;left:1100px;top:600px;"></canvas>
+
+        
+
+{% endblock %}
+
+
+{% block scripts %}
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script type="text/javascript">
+    // keyword  라인차트 js
+var ctx  = document.querySelector('#line-chart').getContext('2d') ;
+var myLineChart = new Chart(ctx, {
+   
+   
+   type: 'line',
+       
+    data: {
+      labels:['January','February','March','April','May','June'],
+      
+          
+      datasets:[
+        {        
+       label: 'title1',
+    backgroundColor: 'rgb(18, 37, 169)',
+    borderColor: 'rgb(18, 37, 169)',
+    data: [20, -10, 5, 2, -20, 30],
+        },
+        {        
+       label: 'title2',
+    backgroundColor: 'rgb(103, 119, 239)',
+    borderColor: 'rgb(103, 119, 239)',
+    data: [5, 20, 15, -40, 10, 30],
+        },
+        {        
+       label: 'title3',
+    backgroundColor: 'rgb(13, 26, 117)',
+    borderColor: 'rgb(13, 26, 117)',
+    data: [20, 5, 10, 30, 10, 30],
+        }
+        
+        ]
+    },    
+    options: {
+         responsive: false,
+         scales: {
+            yAxes: [{
+               ticks: {
+                  beginAtZero: true
+               }
+            }]
+         },
+      }
+    
+});
+
+
+
+    // review  라인차트 js
+var ctx1  = document.querySelector('#line-chart1').getContext('2d') ;
+var myLineChart1 = new Chart(ctx1, {
+   
+   
+   type: 'line',
+       
+    data: {
+      labels:['January','February','March','April','May','June'],
+      
+          
+      datasets:[
+        {        
+       label: 'title1',
+    backgroundColor: 'rgb(18, 37, 169)',
+    borderColor: 'rgb(18, 37, 169)',
+    data: [20, -10, 5, 2, -20, 30],
+        },
+        {        
+       label: 'title2',
+    backgroundColor: 'rgb(103, 119, 239)',
+    borderColor: 'rgb(103, 119, 239)',
+    data: [5, 20, 15, -40, 10, 30],
+        },
+        {        
+       label: 'title3',
+    backgroundColor: 'rgb(13, 26, 117)',
+    borderColor: 'rgb(13, 26, 117)',
+    data: [20, 5, 10, 30, 10, 30],
+        }
+        
+        ]
+    },    
+    options: {
+         responsive: false,
+         scales: {
+            yAxes: [{
+               ticks: {
+                  beginAtZero: true
+               }
+            }]
+         },
+      }
+    
+});
+
+</script>
+
+
+ {%endblock%}

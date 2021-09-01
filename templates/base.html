@@ -1,0 +1,69 @@
+{% load static %}
+<!-- 링크-->
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
+         
+        {%block web_title%}<title>번경 전 웹페이지</title>{%endblock%}
+        
+        <!-- General CSS Files -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+        <!-- CSS Libraries -->
+        <!-- Template CSS -->
+        <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+        <link rel="stylesheet" href="{% static 'assets/css/components.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'assets/css/util.css' %}">
+        <link rel="stylesheet" type="text/css"href="{% static 'assets/css/main.css' %}">
+        <link rel="stylesheet" type="text/css"href="{% static 'assets/css/style.css' %}">
+        <link rel="stylesheet" type="text/css"href="{% static 'assets/css/components.css' %}">
+        <link rel="stylesheet" href="https://cdn.datatables.net/t/bs-3.3.6/jqc-1.12.0,dt-1.10.11/datatables.min.css"/> 
+        <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="crossorigin="anonymous"></script>
+        <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+        <script src="{% static 'assets/js/page/dataTables.bootstrap.min.js' %}"></script> 
+
+    </head>
+
+
+<html>
+<body>
+
+{% block style%}{%endblock%}
+
+
+
+
+
+    <div id="app">
+        <div class="main-wrapper">
+            <div class="navbar-bg"></div>
+            <nav class="navbar navbar-expand-lg main-navbar">
+            <!-- 검색 창-->
+                {% include 'search.html' %}
+            </nav>
+                    
+           {% block foot_size%} <div class="main-content" style="width : 1900px !important; height : 4200px !important; top : 24px;">{% endblock %}
+              <!--내용 -->
+                {% block content %}{% endblock %}
+            </div>
+
+        </div>
+    </div>
+<!--메뉴  바-->
+{% block 'side_bar.html'  %} {%endblock%}
+<!-- 하단 메뉴바-->
+{% include 'footer.html'%}
+<!--script-->
+
+{% block scripts %} {%endblock%}
+
+
+
+
+
+
+
+
+</body>
+</html>
